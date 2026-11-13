@@ -477,3 +477,20 @@ if __name__ == "__main__":
         tick_fontsize=12,
         legend_fontsize=11,
     )
+
+    # The two largest trajectory-RMSE cases in the fitted-ODE validation.
+    plot_sqlb_states_vs_ode_two_examples(
+        BASE_DIR,
+        model_names=["2_15_7_0_0", "2_17_7_0_0"],
+        subplot_titles=["Poor fit: 2_15_7_0_0", "Poor fit: 2_17_7_0_0"],
+        figure_title="ABM vs. fitted CTMC/ODE examples with poor agreement",
+        show=False,
+        save_path=BASE_DIR / "figures" / "abm_ode_two_examples_bad.pdf",
+        fig_width=8.0,
+        fig_height=4.8,
+        title_fontsize=17,
+        subplot_title_fontsize=15,
+        axis_label_fontsize=14,
+        tick_fontsize=12,
+        legend_fontsize=11,
+    )
