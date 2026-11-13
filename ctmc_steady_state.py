@@ -14,7 +14,7 @@ How it is used in the pipeline:
   into steady-state SQLB ratios and writes `steady_states.csv`.
 - `steady_state_surrogate_ode.py`:
   Uses surrogate-predicted generators + x0 to estimate steady-state SQLB ratios.
-- Validation scripts (`validate_surrogate.py`, `validate_surrogate_steady_state.py`):
+- Validation scripts (`validate_surrogate_ode.py`, `validate_fitted_ode.py`):
   Compare surrogate steady-state reconstruction against fitted-ODE steady states.
 
 This module is the core Markov-chain long-run solver for all steady-state results

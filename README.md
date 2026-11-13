@@ -45,7 +45,7 @@ This script defines the full experimental design grid and generates all paramete
 
 ### Step 2: Run `run.py`
 
-This script reads the configurations from settings.csv, constructs the corresponding models, and runs the simulations in parallel. The results are saved to the `models/` directory as `<model_name>.json`.
+This script reads `settings.csv` and runs all 11,088 simulations (16 organization structures × 21 initial opinions × 11 AI accuracies × 3 seeds, 100 steps each) in parallel, using all but two CPU cores. Each simulation is saved to `models/<model_name>.json`. The folder takes about 28 GB. Runs that already have a file in `models/` are skipped, so the script can be stopped and restarted.
 
 ### (Optional) Step 3: Run `network_visualization.py`
 
@@ -129,3 +129,32 @@ For each scenario, it computes:
 
 It renders a 2×2 comparison grid across organization size and initial-opinion sign,
 and saves the figure to `figures/` (default: `figure_loud_share_grid.png`).
+
+### Step 13: Run `run_nosocial.py`
+
+This script runs the individual-only baseline used in the journal extension. Each run uses the same network, initial opinions, initial trust, and random seed as the run with the same name in Step 2, but without peer influence: each agent's opinion changes only through its own AI outcomes. The SQLB fractions at each step are saved to `states_nosocial/<model_name>.csv`, in the same format as `states/`. Model files are not saved. Because trust is never updated without peer influence, the split between Q and L uses initial trust, so compare total adoption (Q + L).
+
+### Step 14: Run `compare_social_vs_nosocial.py`
+
+Requires Steps 4 and 13. For every pair of runs, this script compares final adoption (Q + L) with and without peer influence, using the ABM trajectories directly rather than the surrogate. It saves:
+- `results/nosocial/runs.csv`: one row per run pair
+- `results/nosocial/summary.csv`: mean, min, and max over seeds for each configuration
+- `results/nosocial/min_accuracy.csv`: lowest AI accuracy that reaches 50% adoption
+- `results/nosocial/structure_average.csv`: results averaged over the 16 structures
+- `figures/figure_social_effect_map.pdf` and `figures/figure_social_vs_nosocial_curves.pdf`
+
+### Optional: sensitivity analyses (after Step 8)
+
+- `sensitivity_1a.py`: local sensitivity of steady-state adoption (Q + L) to the four surrogate inputs across the full design grid (derivatives, elasticities, and range-normalized sensitivities). Saves to `sensitivity/layer1_fullgrid/`.
+- `sensitivity_1b.py`: sensitivity of adoption after 100 steps to the initial S, Q, L, B fractions, changing one fraction at a time while keeping the four summing to one. Saves to `results/layer1b/`.
+
+### Optional: `steady_state_fitted_ode.py` (after Step 5)
+
+Computes the long-run SQLB state from each fitted generator and saves it to `steady_states.csv`.
+
+### Helper modules (not run directly)
+
+- `utils.py`: shared paths and the settings loader
+- `predict_surrogate.py`: predicts the CTMC generator from the design inputs using the trained surrogate (used by Steps 9–12 and the sensitivity analyses)
+- `ctmc_steady_state.py`: computes the long-run state of a CTMC generator
+- `steady_state_surrogate_ode.py`: steady-state predictions from the surrogate

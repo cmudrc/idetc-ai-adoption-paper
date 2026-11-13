@@ -41,9 +41,9 @@ in the four inputs above and does not take seed as an input.
 Outputs
 -------
 Writes:
-    results/layer1_fullgrid/layer1_fullgrid_adoption_sensitivity.csv
-    results/layer1_fullgrid/layer1_fullgrid_adoption_sensitivity_summary_by_input.csv
-    results/layer1_fullgrid/layer1_fullgrid_adoption_sensitivity_summary_by_input_and_regime.csv
+    sensitivity/layer1_fullgrid/layer1_fullgrid_adoption_sensitivity.csv
+    sensitivity/layer1_fullgrid/layer1_fullgrid_adoption_sensitivity_summary_by_input.csv
+    sensitivity/layer1_fullgrid/layer1_fullgrid_adoption_sensitivity_summary_by_input_and_regime.csv
 """
 
 from __future__ import annotations
