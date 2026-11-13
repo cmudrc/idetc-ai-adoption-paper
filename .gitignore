@@ -216,6 +216,7 @@ __marimo__/
 .python-version
 
 BASEMENT/
+tmp/
 
 models/
 states/

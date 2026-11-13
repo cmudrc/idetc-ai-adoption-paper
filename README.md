@@ -1,6 +1,6 @@
 # Designing for AI Adoption: A Multi-Scale Modeling Framework for Engineering Organizations
 
-Submitted to ASME IDETC
+Presented at ASME IDETC-CIE 2026 (Paper No. DETC2026-194708). The journal extension uses this code; see [cmudrc/jmd-peer-influence](https://github.com/cmudrc/jmd-peer-influence).
 
 ![Example Network](figures/network_example_1.png)
 
@@ -82,7 +82,7 @@ to ODE transition rates. It:
 Note: The polynomial degree is controlled by `POLY_DEGREE` in `create_surrogate.py`
 (choose this based on Step 7 results).
 
-### Step 9: Run `validate_surrogate.py`
+### Step 9: Run `validate_surrogate_ode.py`
 
 This script validates surrogate-predicted trajectories against ABM trajectories
 across all model configurations. It:
